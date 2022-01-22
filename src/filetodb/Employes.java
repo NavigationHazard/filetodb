@@ -1,8 +1,8 @@
 package filetodb;
 import java.io.File;
- 
 import java.sql.*;
 import java.util.Scanner;
+ 
 
 public class Employes {
     private String empName;
@@ -103,7 +103,7 @@ public class Employes {
     private Connection connect(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/employes", "root", "siemens00");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/employe", "root", "siemens00");
         } catch (SQLException | ClassNotFoundException e) {
            
             System.out.println(e);
