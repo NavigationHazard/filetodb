@@ -55,10 +55,10 @@ public class Employes {
     private void saveData(){
         try(Connection conn = connect();
             // use preparestatements to prevent sql injection attacks ? are place holders for value passing
-            PreparedStatement pstat = conn.prepareStatement("INSERT INTO employes VALUES(? , ? , ?) ")){
+            PreparedStatement pstat = conn.prepareStatement("INSERT INTO employe VALUES(NULL, ? , ? , ?) ")){
 
-                pstat.setString(1, empName);
-                pstat.setInt(2, empSalary);
+                pstat.setString(2, empName);
+                pstat.setInt(1, empSalary);
                 pstat.setInt(3, empDeptId);
 
                 pstat.executeUpdate();
@@ -70,7 +70,7 @@ public class Employes {
         try(Connection conn = connect();
             // select all data from the table and check if it has done so
                 Statement stat = conn.createStatement()) {
-            boolean hasResultSet = stat.execute("SELECT * FROM employes");
+            boolean hasResultSet = stat.execute("SELECT * FROM employe");
             if(hasResultSet){
                 // create a result set
                 ResultSet result = stat.getResultSet();
@@ -78,12 +78,9 @@ public class Employes {
                 ResultSetMetaData metaData = result.getMetaData();
 
                 // get number of columns
-                int columncount = metaData.getColumnCount();
+                
                 // return the labels fo the columns
-                for(int i = 1; i <=columncount; i++){
-                    System.out.println(metaData.getColumnLabel(i)+"\t\t");
-                }
-                System.out.println();
+               
                 // return the rows
                 while(result.next()){
                     // reordering 
@@ -103,7 +100,7 @@ public class Employes {
     private Connection connect(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/employe", "root", "siemens00");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/filetodb", "root", "siemens00");
         } catch (SQLException | ClassNotFoundException e) {
            
             System.out.println(e);
